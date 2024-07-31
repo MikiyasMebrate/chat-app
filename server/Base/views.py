@@ -8,6 +8,11 @@ from .models import (
 from UserManagement.models import CustomUser , ProfilePicture
 # Create your views here. 
 
+
+def chat(request):
+    return render(request, "base/chat.html")
+
+
 @api_view(['GET'])
 def user_list(request):
     user = list(CustomUser.objects.all().values())
