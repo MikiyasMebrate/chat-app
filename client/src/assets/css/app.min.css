@@ -1157,8 +1157,8 @@ body[data-bs-theme="dark"] .dark-mode {
   cursor: pointer;
   border: 1px solid var(--bs-border-color);
 }
+
 .user-chat {
-  background: url(../images/bg-pattern/pattern-05.png);
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   position: relative;
