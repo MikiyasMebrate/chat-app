@@ -14,46 +14,50 @@ import Calls from "./pages/Calls";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Container from "./components/ui/Container";
-import Default from "./components/ui/Default";
 import Login from "./components/ui/Auth/Login";
-
-import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./utility/ProtectedRoute";
 
-
+import { AuthProvider } from "./context/AuthContext";
+import { MessageProvider } from "./context/MessageContext";
+import Default from "./components/ui/Default";
 
 const router = createBrowserRouter([
-   {
-      element : <ProtectedRoute />,
-      children : [
-         {
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/",
+        element: <Container />,
+        children: [
+          {
             path: "/",
-            element: <Container />,
-            children: [
-              {
-                path: "/",
-                element: <Home />,
-              },
-              {
-                path: "/chat",
-                element: <Chat />,
-              },
-              {
-                path: "/contact",
-                element: <Contact />,
-              },
-              {
-                path: "/calls",
-                element: <Calls />,
-              },
-              {
-                path: "/setting",
-                element: <Setting />,
-              },
-            ],
+            element: <Home />,
           },
-      ]
-   },
+          {
+            path: "/chat",
+            element: <Chat />,
+          },
+          {
+            path: "/chat/:username",
+            element: <Contact />
+          },
+          
+          {
+            path: "/contact",
+            element: <Contact />,
+          },
+          {
+            path: "/calls",
+            element: <Calls />,
+          },
+          {
+            path: "/setting",
+            element: <Setting />,
+          },
+        ],
+      },
+    ],
+  },
   {
     path: "/login",
     element: <Login />,
@@ -61,11 +65,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
+  <AuthProvider>
+    <MessageProvider>
       <div className="layout-wrapper d-lg-flex">
         <RouterProvider router={router} />
       </div>
-    </AuthProvider>
-  </React.StrictMode>
+    </MessageProvider>
+  </AuthProvider>
 );

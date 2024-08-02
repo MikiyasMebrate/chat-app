@@ -1,50 +1,74 @@
 import axios from "axios"
 import {createContext, useState, useEffect} from "react"
-import { jwtDecode } from "jwt-decode";
-import { redirect } from "react-router-dom";
+import {jwtDecode} from "jwt-decode"
+import { redirect } from "react-router-dom"
 
 
 const AuthContext = createContext()
-
 export default AuthContext
 
 export const AuthProvider = ({children}) =>{
-    const [authTokens, setAuthTokens] = useState(()=>localStorage.getItem("authTokens") ? JSON.parse( localStorage.getItem("authTokens")) : null)
-    const [user, setUser] = useState(()=>localStorage.getItem("authTokens") ? jwtDecode( localStorage.getItem("authTokens")) : null)
-    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(localStorage.getItem("authTokens") ? jwtDecode(localStorage.getItem("authTokens")) : null )
+    const [authTokens, setAuthToken] = useState(localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null )
+    const [userInfo, setUserInfo] = useState(localStorage.getItem("profile") ? jwtDecode(localStorage.getItem("profile")) : null)
 
-    const loginUser = async(data) => {
-        try {
-            console.log(data)
-            const response = await axios.post('http://127.0.0.1:8000/api/token/',{ "phone": data.phone, "password": data.password })
+
+
+    const getUserInfo = async () => {
+        try{
+            const response = await axios.get('http://127.0.0.1:8000/user-profile/', {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                     Authorization: 'Bearer ' + String(authTokens.access)
+                  }
+            })
+
             if(response.status == 200){
-                setAuthTokens(response.data)
-                setUser(jwtDecode(response.data.access))
-                localStorage.setItem("authTokens", JSON.stringify(response.data))
-                
+                setUserInfo(response.data)
+                //localStorage.setItem("profile" , JSON.stringify(response.data))
+                return true
             }else{
-                setAuthTokens(null)
-                alert("error")
+                console.log("error")
+                return false
             }
-        } catch (err) {
-            setAuthTokens(null)
+            
+        }catch(err){
             console.log(err)
+            return false
         }
     }
 
-    const logoutUser = () => {
-        console.log("called")
-        setAuthTokens(null)
-        setUser(null)
-        localStorage.removeItem("authTokens")
-        return redirect("/")
+
+
+
+    const loginUser = async (data) =>{
+        try{
+            const response = await axios.post('http://127.0.0.1:8000/api/token/', {"phone" : data.phone, "password" : data.password})
+        if(response.status == 200){
+            setAuthToken(response.data)
+            setUser(jwtDecode(response.data.access))
+            localStorage.setItem("authTokens" , JSON.stringify(response.data))
+            return true         
+        }else{
+            setAuthToken(null)
+            setUser(null)
+            return false
+        }
+        }catch(err){
+            setAuthToken(null)
+            setUser(null)
+            return false
+        }
+
+        
     }
 
     const updateToken = async () =>{
         try {
+            console.log("updated")
             const response = await axios.post('http://127.0.0.1:8000/api/token/refresh/',{ "refresh": authTokens.refresh})
             if(response.status == 200){
-                setAuthTokens(response.data)
+                setAuthToken(response.data)
                 setUser(jwtDecode(response.data.access))
                 localStorage.setItem("authTokens", JSON.stringify(response.data))
             }else{
@@ -55,32 +79,51 @@ export const AuthProvider = ({children}) =>{
         }
     }
 
-
-
     useEffect(()=>{
-        let fourMin = 1000 * 60 * 4
+        if(authTokens){
+            getUserInfo()
+        }
+    },[authTokens])
+
+    useEffect(() =>{
+        let fourMin = 1000 * 60 * 3
         let interval = setInterval(()=>{
             if(authTokens){
+                console.log("called child")
                 updateToken()
             }
-        }, fourMin)
+        }, fourMin) 
 
         return(()=>clearInterval(interval))
-    },[authTokens, loading])
+    }, [authTokens])
 
 
 
-    let contextData = {
-        user : user,
-        loginUser : loginUser,
-        logoutUser : logoutUser,
+    const logoutUser = () =>{
+        setUser(null)
+        setAuthToken(null)
+        localStorage.removeItem("authTokens")
+        return redirect("/login")
     }
 
 
+    //What functionality will applied 
+    let contextData = {
+        user,
+        loginUser,
+        logoutUser,
+        updateToken,
+        authTokens,
+        getUserInfo,
+        userInfo,
+    }
 
     return(
         <AuthContext.Provider value={contextData}>
             {children}
         </AuthContext.Provider>
     )
+
+    
 }
+

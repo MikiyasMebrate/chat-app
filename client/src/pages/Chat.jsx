@@ -20,8 +20,8 @@ const Chat = () => {
                                 </div>
                                 <form>
                                     <div className="input-group mb-3">
-                                        <input type="text" className="form-control bg-light border-0 pe-0" id="serachChatUser" onkeyup="searchUser()" placeholder="Search here.." 
-                                        aria-label="Example text with button addon" aria-describedby="searchbtn-addon" autocomplete="off" />
+                                        <input type="text" className="form-control bg-light border-0 pe-0" id="serachChatUser" placeholder="Search here.." 
+                                        aria-label="Example text with button addon" aria-describedby="searchbtn-addon"  />
                                         <button className="btn btn-light" type="button" id="searchbtn-addon"><i className='bx bx-search align-middle'></i></button>
                                     </div>
                                 </form>
@@ -81,7 +81,7 @@ const Chat = () => {
                             </div>
 
                         </div>
-                        <div className="modal fade" id="addgroup-exampleModal" tabindex="-1" role="dialog" aria-labelledby="addgroup-exampleModalLabel" aria-hidden="true">
+                        <div className="modal fade" id="addgroup-exampleModal" tabIndex="-1" role="dialog" aria-labelledby="addgroup-exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                 <div className="modal-content modal-header-colored shadow-lg border-0">
                                     <div className="modal-header">
@@ -92,7 +92,7 @@ const Chat = () => {
                                     <div className="modal-body p-4">
                                         <form>
                                             <div className="mb-4">
-                                                <label for="addgroupname-input" className="form-label">Group Name</label>
+                                                <label htmlFor="addgroupname-input" className="form-label">Group Name</label>
                                                 <input type="text" className="form-control" id="addgroupname-input" placeholder="Enter Group Name" />
                                             </div>
                                             <div className="mb-4">
@@ -118,15 +118,15 @@ const Chat = () => {
                                                                     <ul className="list-unstyled contact-list">
                                                                         <li>
                                                                             <div className="form-check">
-                                                                                <input type="checkbox" className="form-check-input" id="memberCheck1" checked />
-                                                                                <label className="form-check-label" for="memberCheck1">Albert Rodarte</label>
+                                                                                <input type="checkbox" className="form-check-input" id="memberCheck1"  />
+                                                                                <label className="form-check-label" htmlFor="memberCheck1">Albert Rodarte</label>
                                                                             </div>
                                                                         </li>
 
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck2" />
-                                                                                <label className="form-check-label" for="memberCheck2">Allison Etter</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck2">Allison Etter</label>
                                                                             </div>
                                                                         </li>
                                                                     </ul>
@@ -141,7 +141,7 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck3" />
-                                                                                <label className="form-check-label" for="memberCheck3">Craig Smiley</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck3">Craig Smiley</label>
                                                                             </div>
                                                                         </li>
 
@@ -157,7 +157,7 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck4" />
-                                                                                <label className="form-check-label" for="memberCheck4">Daniel Clay</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck4">Daniel Clay</label>
                                                                             </div>
                                                                         </li>
 
@@ -173,7 +173,7 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck5" />
-                                                                                <label className="form-check-label" for="memberCheck5">Iris Wells</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck5">Iris Wells</label>
                                                                             </div>
                                                                         </li>
 
@@ -189,21 +189,21 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck6" />
-                                                                                <label className="form-check-label" for="memberCheck6">Juan Flakes</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck6">Juan Flakes</label>
                                                                             </div>
                                                                         </li>
 
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck7" />
-                                                                                <label className="form-check-label" for="memberCheck7">John Hall</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck7">John Hall</label>
                                                                             </div>
                                                                         </li>
 
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck8" />
-                                                                                <label className="form-check-label" for="memberCheck8">Joy Southern</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck8">Joy Southern</label>
                                                                             </div>
                                                                         </li>
 
@@ -219,14 +219,14 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck9" />
-                                                                                <label className="form-check-label" for="memberCheck9">Michael Hinton</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck9">Michael Hinton</label>
                                                                             </div>
                                                                         </li>
 
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck10" />
-                                                                                <label className="form-check-label" for="memberCheck10">Mary Farmer</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck10">Mary Farmer</label>
                                                                             </div>
                                                                         </li>
 
@@ -242,7 +242,7 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck11" />
-                                                                                <label className="form-check-label" for="memberCheck11">Phillis Griffin</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck11">Phillis Griffin</label>
                                                                             </div>
                                                                         </li>
 
@@ -258,7 +258,7 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck12" />
-                                                                                <label className="form-check-label" for="memberCheck12">Rocky Jackson</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck12">Rocky Jackson</label>
                                                                             </div>
                                                                         </li>
 
@@ -274,7 +274,7 @@ const Chat = () => {
                                                                         <li>
                                                                             <div className="form-check">
                                                                                 <input type="checkbox" className="form-check-input" id="memberCheck13" />
-                                                                                <label className="form-check-label" for="memberCheck13">Simon Velez</label>
+                                                                                <label className="form-check-label" htmlFor="memberCheck13">Simon Velez</label>
                                                                             </div>
                                                                         </li>
 
@@ -287,7 +287,7 @@ const Chat = () => {
                                                 </div>
                                             </div>
                                             <div className="mb-3">
-                                                <label for="addgroupdescription-input" className="form-label">Description</label>
+                                                <label htmlFor="addgroupdescription-input" className="form-label">Description</label>
                                                 <textarea className="form-control" id="addgroupdescription-input" rows="3" placeholder="Enter Description"></textarea>
                                             </div>
                                         </form>

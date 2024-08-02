@@ -5,19 +5,20 @@ from UserManagement.models import (
 
 
 class Room(models.Model):
-    name = models.CharField(max_length=50)
+    user1 = models.ForeignKey(CustomUser, related_name="user1",on_delete=models.CASCADE)
+    user2 = models.ForeignKey(CustomUser, related_name="user2",on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.name
+        return self.user1.first_name + self.user2.first_name
 
 class Message(models.Model):
     sender = models.ForeignKey(CustomUser, related_name="sender",on_delete=models.CASCADE)
-    receiver = models.ForeignKey(CustomUser, related_name="receiver",  on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     message = models.TextField()
+    time_stamp = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.sender.first_name + " " + self.receiver.first_name
+        return self.sender.first_name 
         
     
     

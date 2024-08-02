@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import Default from "./Default"
 
@@ -12,7 +12,7 @@ const Container = () => {
 
         <div className="chat-leftsidebar">
           <div className="tab-content">
-            <Outlet />
+          <Outlet />
           </div>
         </div>
 

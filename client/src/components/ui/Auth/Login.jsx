@@ -1,13 +1,10 @@
-import {useForm} from 'react-hook-form'
+import {set, useForm} from 'react-hook-form'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useContext } from 'react';
-import AuthContext from '../../../context/AuthContext';
-
-import {Navigate} from 'react-router-dom'
-
-
+import { useContext, useState } from 'react';
+import AuthContext  from '../../../context/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 
 const schema = yup.object({
@@ -15,33 +12,24 @@ const schema = yup.object({
     password : yup.string().min(3).required()
 })
 const Login = () => {
-
     const {loginUser, user} = useContext(AuthContext)
+    const [loginError, setLoginError] = useState(false)
 
     const {register , handleSubmit ,  formState:{isSubmitting , errors }} = useForm({
         resolver: yupResolver(schema)
     })
     const onSubmit = async (data) => {
-        try{
-            let response = await loginUser(data)
-            console.log(response)
-        }catch(err){
-            console.log(err)
-        }
+       let response =  await loginUser(data)
+       setLoginError(!response)
     } 
     return (
         <>
+        {user && <Navigate to="/" />}
         <div className="auth-bg w-100">
             <div className="container-fluid p-0">
                 <div className="row g-0">
                     <div className="col-xl-3 col-lg-4">
                         <div className="p-4 pb-0 p-lg-5 pb-lg-0 auth-logo-section">
-                            <div className="text-white-50">
-                                
-                            </div>
-                            <div className="mt-auto">
-                                <img src="assets/images/auth-img.png" alt="" className="auth-img" />
-                            </div>
                         </div>
                     </div>
                     
@@ -55,11 +43,12 @@ const Login = () => {
                                             
                                             <div className="text-center mb-5">
                                                 <h3>Welcome Back !</h3>
-                                                <p className="text-muted">Sign in to continue to Doot.</p>
+                                                <p className="text-muted">Sign in to continue to Chat.</p>
+                                                {loginError && <span className="badge rounded-pill bg-danger p-3"> Phone number or password is incorrect!</span>}
                                             </div>
                                             <form onSubmit={handleSubmit(onSubmit) }>
                                                 <div className="mb-3">
-                                                    <label for="username" className="form-label">Phone Number</label>
+                                                    <label htmlFor="username" className="form-label">Phone Number</label>
                                                     <input type="text" className={`form-control   ${errors.phone ? 'is-invalid' : ''}`} {...register('phone')} placeholder="Enter username" />
                                                     {errors.phone && <p className='text-danger'> {errors.phone.message} </p>}
                                                 </div>
@@ -68,7 +57,7 @@ const Login = () => {
                                                     <div className="float-end">
                                                         <a href="auth-recoverpw.html" className="text-muted">Forgot password?</a>
                                                     </div>
-                                                    <label for="userpassword" className="form-label">Password</label>
+                                                    <label htmlFor="userpassword" className="form-label">Password</label>
                                                     <div className="mb-3">
                                                         <input type="password" className={`form-control   ${errors.password ? 'is-invalid' : ''}`} placeholder="Enter Password" {...register('password')} />
                                                     </div>
@@ -79,7 +68,7 @@ const Login = () => {
                                                 <div className="text-center mt-4">
                                                     <button disabled={isSubmitting} className="btn btn-primary w-100" type="submit">{isSubmitting ? 'Loading' : 'Login'}</button>
                                                 </div>
-                                                {user && <Navigate to={"/"}/>}
+                                               
                                             </form>
             
                                             <div className="mt-5 text-center text-muted">

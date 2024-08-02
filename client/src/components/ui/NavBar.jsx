@@ -1,9 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 
+
 const NavBar = () => {
-  const { logoutUser } = useContext(AuthContext);
+  const {logoutUser} = useContext(AuthContext)
+
   return (
     <>
       <div className="side-menu flex-lg-column">
@@ -155,7 +157,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li
-              className="nav-item d-none d-lg-block"
+              className="nav-item  d-lg-block"
               data-bs-toggle="tooltip"
               data-bs-placement="right"
               data-bs-container=".sidemenu-navigation"
@@ -183,30 +185,8 @@ const NavBar = () => {
                 </svg>
               </NavLink>
             </li>
-            <li className="nav-item mt-auto">
-              <a
-                className="nav-link light-dark"
-                href="#"
-                data-bs-toggle="tooltip"
-                data-bs-trigger="hover"
-                data-bs-placement="right"
-                data-bs-container=".sidemenu-navigation"
-                data-bs-html="true"
-                title="<span className='light-mode'>Light</span> <span className='dark-mode'>Dark</span> Mode"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  fill="currentColor"
-                  className="bi bi-moon-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
-                </svg>
-              </a>
-            </li>
-            <li className="nav-item dropdown profile-user-dropdown">
+
+            <li className="nav-item mt-auto dropdown profile-user-dropdown">
               <button
                 className="nav-link dropdown-toggle"
                 onClick={logoutUser}
@@ -220,7 +200,7 @@ const NavBar = () => {
                   width="25"
                   height="25"
                   fill="currentColor"
-                  class="bi bi-power"
+                  className="bi bi-power"
                   viewBox="0 0 16 16"
                 >
                   <path d="M7.5 1v7h1V1z" />

@@ -11,17 +11,18 @@
 
 <body>
     <h1>Let chat!</h1>
-    <div class="mb-3">
+
+    <div className="mb-3">
         <form id="chat_id">
             <label for="chat_id_input">Chat ID</label>
-            <input type="text" class="form-control" name="chat_id" id="chat_id_input">
-            <button type="submit" class="btn  btn-primary mt-3">Submit</button>
+            <input type="text" className="form-control" name="chat_id" id="chat_id_input">
+            <button type="submit" className="btn  btn-primary mt-3">Submit</button>
         </form>
     </div>
 
     <form id="form">
-        <label for="message_input">Chat ID</label>
-        <input type="text" class="form-control" id="message_input" name="message">
+        <label for="message_input">Chat</label>
+        <input type="text" className="form-control" id="message_input" name="message">
     </form>
 
     <div id="body">
@@ -37,6 +38,8 @@
         chat_id.addEventListener('submit', (e) => {
             e.preventDefault();
             let id = e.target.chat_id.value
+
+            console.log(id)
 
            
 
@@ -56,6 +59,8 @@
                     let message = document.getElementById("body")
                     message.insertAdjacentHTML("beforeend", `<p>${data.message}</p>`)
                 }
+
+
             }
 
             let form = document.getElementById("form")
@@ -63,6 +68,8 @@
             form.addEventListener('submit', (e) => {
                 e.preventDefault()
                 let message = document.querySelector('input[name="message"]').value
+
+                
                 chatSocket.send(JSON.stringify({
                     'message': message,
                 }))
